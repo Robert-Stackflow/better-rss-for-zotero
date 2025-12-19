@@ -141,5 +141,5 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 ## 🙏 致谢
 
 - [Mozilla Readability](https://github.com/mozilla/readability) - 正文提取算法
-- [Zotero Plugin Toolkit](https://github.com/windingwind/zotero-plugin-toolkit) - 插件开发工具
+- [Zotero Plugin Toolkit](https://github.com/Robert-Stackflow/zotero-plugin-toolkit) - 插件开发工具
 - [Zotero](https://www.zotero.org/) - 优秀的文献管理工具
