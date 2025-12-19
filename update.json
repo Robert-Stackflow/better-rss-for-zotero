@@ -1,0 +1,19 @@
+{
+  "addons": {
+    "BetterRSSforZotero@cloudchewie.com": {
+      "updates": [
+        {
+          "version": "0.1.0",
+          "update_link": "https://github.com/Robert-Stackflow/better-rss-for-zotero/releases/download/v0.1.0/better-rss-for-zotero.xpi",
+          "update_hash": "sha512:b23cadcf7eb90aa3a0e38df003a9cd8688c69efe8c261a4b031a890fa98b747d5619dac1bae96498f21e8a29c29d8f022e112385f82677b5c045f339853f253d",
+          "applications": {
+            "zotero": {
+              "strict_min_version": "6.999",
+              "strict_max_version": "7.*"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

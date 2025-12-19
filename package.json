@@ -1,0 +1,48 @@
+{
+    "name": "better-rss-for-zotero",
+    "version": "0.1.0",
+    "description": "Enhanced RSS functionality for Zotero with full content extraction",
+    "config": {
+        "addonName": "Better RSS for Zotero",
+        "addonID": "BetterRSSforZotero@cloudchewie.com",
+        "addonRef": "better_rss_for_zotero",
+        "addonInstance": "BetterRSSforZotero",
+        "prefsPrefix": "extensions.zotero.better_rss_for_zotero"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Robert-Stackflow/better-rss-for-zotero.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Robert-Stackflow/better-rss-for-zotero/issues"
+    },
+    "homepage": "https://github.com/Robert-Stackflow/better-rss-for-zotero#readme",
+    "main": "src/bootstrap.js",
+    "scripts": {
+        "build": "zotero-plugin build",
+        "build:dev": "cross-env NODE_ENV=development zotero-plugin build",
+        "serve": "zotero-plugin serve",
+        "lint": "eslint . --ext .ts",
+        "release": "zotero-plugin release"
+    },
+    "keywords": [
+        "zotero",
+        "rss",
+        "feed",
+        "readability"
+    ],
+    "author": "Robert-Stackflow",
+    "license": "MIT",
+    "dependencies": {
+        "@mozilla/readability": "^0.5.0",
+        "zotero-plugin-toolkit": "^5.1.0-beta.13"
+    },
+    "devDependencies": {
+        "@types/node": "^25.0.3",
+        "cross-env": "^7.0.3",
+        "esbuild": "^0.27.2",
+        "typescript": "^5.9.3",
+        "zotero-plugin-scaffold": "^0.8.0",
+        "zotero-types": "^4.0.5"
+    }
+}

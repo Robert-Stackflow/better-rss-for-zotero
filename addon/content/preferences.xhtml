@@ -1,0 +1,87 @@
+<linkset>
+  <html:link rel="localization" href="__addonRef__-preferences.ftl" />
+</linkset>
+<vbox
+  id="zotero-prefpane-__addonRef__"
+  onload="Zotero.__addonInstance__.hooks.onPrefsLoad(event)"
+>
+  <groupbox>
+    <label><html:h2 data-l10n-id="pref-auto-extraction-title"></html:h2></label>
+    <checkbox
+      native="true"
+      id="__addonRef__-auto-extract"
+      preference="__prefsPrefix__.autoExtract"
+      data-l10n-id="pref-auto-extract-label"
+    />
+    <checkbox
+      native="true"
+      id="__addonRef__-save-to-folder"
+      preference="__prefsPrefix__.saveToFolder"
+      data-l10n-id="pref-save-to-folder-label"
+    />
+    <vbox style="margin-left: 20px">
+      <label
+        data-l10n-id="pref-folder-path-template-label"
+        control="__addonRef__-folder-path-template"
+      ></label>
+      <html:input
+        type="text"
+        id="__addonRef__-folder-path-template"
+        preference="__prefsPrefix__.saveFolderPathTemplate"
+        style="width: 400px"
+      />
+      <html:div style="font-size: 0.9em; color: #666; margin-top: 4px">
+        <html:div data-l10n-id="pref-folder-path-template-hint"></html:div>
+      </html:div>
+    </vbox>
+  </groupbox>
+
+  <groupbox>
+    <label><html:h2 data-l10n-id="pref-content-saving-title"></html:h2></label>
+    <checkbox
+      native="true"
+      id="__addonRef__-save-note"
+      preference="__prefsPrefix__.saveNote"
+      data-l10n-id="pref-save-note-label"
+    />
+    <checkbox
+      native="true"
+      id="__addonRef__-save-snapshot"
+      preference="__prefsPrefix__.saveSnapshot"
+      data-l10n-id="pref-save-snapshot-label"
+    />
+  </groupbox>
+
+  <groupbox>
+    <label><html:h2 data-l10n-id="pref-tagging-title"></html:h2></label>
+    <checkbox
+      native="true"
+      id="__addonRef__-add-better-rss-tag"
+      preference="__prefsPrefix__.addBetterRSSTag"
+      data-l10n-id="pref-add-better-rss-tag-label"
+    />
+    <checkbox
+      native="true"
+      id="__addonRef__-add-feed-name-tag"
+      preference="__prefsPrefix__.addFeedNameTag"
+      data-l10n-id="pref-add-feed-name-tag-label"
+    />
+  </groupbox>
+
+  <groupbox>
+    <label><html:h2 data-l10n-id="pref-about-title"></html:h2></label>
+    <label
+      data-l10n-id="pref-about-version"
+      data-l10n-args='{"time": "__buildTime__","name": "__addonName__","version":"__buildVersion__"}'
+    ></label>
+    <hbox align="center">
+      <label
+        data-l10n-id="pref-about-feedback"
+        is="zotero-text-link"
+        class="zotero-text-link"
+        href="https://github.com/Robert-Stackflow/zotero-pdf-translate/issues"
+        style="margin-right: 4px"
+      ></label>
+    </hbox>
+  </groupbox>
+</vbox>

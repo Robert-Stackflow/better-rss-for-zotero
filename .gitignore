@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+.scaffold/
+build/
+dist/
+*.xpi
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+*.tmp
+.temp/
+
+# Old files (backup)
+src/bootstrap.js
+src/modules/*.js
+build.js
+chrome.manifest
+install.rdf
+chrome/
+
+.env
