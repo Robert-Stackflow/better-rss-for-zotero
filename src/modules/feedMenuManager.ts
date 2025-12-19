@@ -7,7 +7,7 @@ export class FeedMenuManager {
    */
   register(): void {
     try {
-      // Register using ztoolkit Menu helper
+      // Register menu for feed items
       ztoolkit.Menu.register("item", {
         tag: "menuitem",
         id: "zotero-itemmenu-betterrss-extract",
@@ -19,6 +19,20 @@ export class FeedMenuManager {
           return (
             items && items.length > 0 && items.some((item) => item.isFeedItem)
           );
+        },
+      });
+
+      // Register menu for feeds (on feed itself)
+      ztoolkit.Menu.register("collection", {
+        tag: "menuitem",
+        id: "zotero-collectionmenu-betterrss-extract-all",
+        label: getString("menuitem-extract-all-label"),
+        icon: `chrome://${addon.data.config.addonRef}/content/icons/favicon.png`,
+        commandListener: (ev) => addon.hooks.onExtractAllFromFeed(),
+        getVisibility: (elem, ev) => {
+          const collection =
+            Zotero.getActiveZoteroPane().getSelectedCollection();
+          if (!collection) return true;
         },
       });
 

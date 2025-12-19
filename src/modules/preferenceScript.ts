@@ -4,6 +4,9 @@ import { getPref, setPref, hasPref } from "../utils/prefs";
 
 const DEFAULT_PREFS: Record<string, any> = {
   autoExtract: true,
+  batchExtractInterval: 1000,
+  enableKeywordFilter: false,
+  keywordFilterRules: "",
   saveToFolder: true,
   saveFolderPathTemplate: "Feeds/%feedName%",
   saveNote: true,
@@ -92,6 +95,27 @@ function bindPrefEvents() {
     .querySelector(`#${makeId("folder-path-template")}`)
     ?.addEventListener("input", (e: Event) => {
       onPrefsEvent("updateFolderPathTemplate");
+    });
+
+  // Batch interval input
+  doc
+    .querySelector(`#${makeId("batch-interval")}`)
+    ?.addEventListener("input", (e: Event) => {
+      onPrefsEvent("updateBatchInterval");
+    });
+
+  // Enable keyword filter checkbox
+  doc
+    .querySelector(`#${makeId("enable-keyword-filter")}`)
+    ?.addEventListener("command", (e: Event) => {
+      onPrefsEvent("toggleKeywordFilter");
+    });
+
+  // Keyword filter rules textarea
+  doc
+    .querySelector(`#${makeId("keyword-filter-rules")}`)
+    ?.addEventListener("input", (e: Event) => {
+      onPrefsEvent("updateKeywordFilterRules");
     });
 
   // Save note checkbox
@@ -209,6 +233,31 @@ function onPrefsEvent(type: string, fromElement: boolean = true) {
         const addFeedNameTag = getPref("addFeedNameTag") as boolean;
         ztoolkit.log(`Feed name tag toggled: ${addFeedNameTag}`);
         setPref("addFeedNameTag", addFeedNameTag);
+      }
+      break;
+
+    case "updateBatchInterval":
+      {
+        const interval = getPref("batchExtractInterval") as number;
+        ztoolkit.log(`Batch interval updated: ${interval}ms`);
+        setPref("batchExtractInterval", interval);
+      }
+      break;
+
+    case "toggleKeywordFilter":
+      {
+        const enableKeywordFilter = getPref("enableKeywordFilter") as boolean;
+        setDisabled("keyword-filter-rules", !enableKeywordFilter);
+        ztoolkit.log(`Keyword filter toggled: ${enableKeywordFilter}`);
+        setPref("enableKeywordFilter", enableKeywordFilter);
+      }
+      break;
+
+    case "updateKeywordFilterRules":
+      {
+        const rules = getPref("keywordFilterRules") as string;
+        ztoolkit.log(`Keyword filter rules updated: ${rules}`);
+        setPref("keywordFilterRules", rules);
       }
       break;
 

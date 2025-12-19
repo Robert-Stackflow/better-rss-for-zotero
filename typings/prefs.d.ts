@@ -11,6 +11,9 @@ declare namespace _ZoteroTypes {
       "autoExtract": boolean;
       "saveToFolder": boolean;
       "saveFolderPathTemplate": string;
+      "batchExtractInterval": number;
+      "enableKeywordFilter": boolean;
+      "keywordFilterRules": string;
       "saveNote": boolean;
       "saveSnapshot": boolean;
       "addBetterRSSTag": boolean;

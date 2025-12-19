@@ -1,7 +1,16 @@
 
-pref-auto-extraction-title = 自动提取
+pref-extraction-title = 提取设置
 pref-auto-extract-label =
     .label = 订阅源更新时自动提取完整内容
+
+pref-batch-interval-label = 批量提取间隔：
+pref-batch-interval-unit = 毫秒
+
+pref-enable-keyword-filter-label =
+    .label = 启用关键词过滤
+pref-keyword-filter-rules-label = 关键词过滤规则（每行一条）：
+pref-keyword-filter-rules-hint = 格式：+ 必须包含 | - 不能包含 | ? 包含其一。示例：+AI +机器学习（同时包含AI和机器学习），-广告（不包含广告），?科技 ?技术（包含科技或技术之一）
+
 pref-save-to-folder-label =
     .label = 将提取的条目保存到分类
 pref-folder-path-template-label = 分类路径模板：

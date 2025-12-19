@@ -6,37 +6,6 @@
   onload="Zotero.__addonInstance__.hooks.onPrefsLoad(event)"
 >
   <groupbox>
-    <label><html:h2 data-l10n-id="pref-auto-extraction-title"></html:h2></label>
-    <checkbox
-      native="true"
-      id="__addonRef__-auto-extract"
-      preference="__prefsPrefix__.autoExtract"
-      data-l10n-id="pref-auto-extract-label"
-    />
-    <checkbox
-      native="true"
-      id="__addonRef__-save-to-folder"
-      preference="__prefsPrefix__.saveToFolder"
-      data-l10n-id="pref-save-to-folder-label"
-    />
-    <vbox style="margin-left: 20px">
-      <label
-        data-l10n-id="pref-folder-path-template-label"
-        control="__addonRef__-folder-path-template"
-      ></label>
-      <html:input
-        type="text"
-        id="__addonRef__-folder-path-template"
-        preference="__prefsPrefix__.saveFolderPathTemplate"
-        style="width: 400px"
-      />
-      <html:div style="font-size: 0.9em; color: #666; margin-top: 4px">
-        <html:div data-l10n-id="pref-folder-path-template-hint"></html:div>
-      </html:div>
-    </vbox>
-  </groupbox>
-
-  <groupbox>
     <label><html:h2 data-l10n-id="pref-content-saving-title"></html:h2></label>
     <checkbox
       native="true"
@@ -66,6 +35,86 @@
       preference="__prefsPrefix__.addFeedNameTag"
       data-l10n-id="pref-add-feed-name-tag-label"
     />
+  </groupbox>
+  <groupbox>
+    <label><html:h2 data-l10n-id="pref-extraction-title"></html:h2></label>
+
+    <!-- Auto extraction -->
+    <checkbox
+      native="true"
+      id="__addonRef__-auto-extract"
+      preference="__prefsPrefix__.autoExtract"
+      data-l10n-id="pref-auto-extract-label"
+    />
+
+    <!-- Batch extraction interval -->
+    <hbox align="center" style="margin-top: 8px">
+      <label data-l10n-id="pref-batch-interval-label"></label>
+      <html:input
+        type="number"
+        id="__addonRef__-batch-interval"
+        preference="__prefsPrefix__.batchExtractInterval"
+        min="100"
+        max="10000"
+        step="100"
+        style="width: 100px; margin-left: 8px"
+      />
+      <label
+        data-l10n-id="pref-batch-interval-unit"
+        style="margin-left: 4px"
+      ></label>
+    </hbox>
+
+    <!-- Keyword filter -->
+    <checkbox
+      native="true"
+      id="__addonRef__-enable-keyword-filter"
+      preference="__prefsPrefix__.enableKeywordFilter"
+      data-l10n-id="pref-enable-keyword-filter-label"
+      style="margin-top: 8px"
+    />
+
+    <vbox style="margin-left: 20px; margin-top: 8px">
+      <label data-l10n-id="pref-keyword-filter-rules-label"></label>
+      <html:textarea
+        id="__addonRef__-keyword-filter-rules"
+        preference="__prefsPrefix__.keywordFilterRules"
+        rows="6"
+        style="
+          width: 500px;
+          margin-top: 4px;
+          font-family: monospace;
+          font-size: 0.9em;
+        "
+      ></html:textarea>
+      <html:div style="font-size: 0.85em; color: #666; margin-top: 4px">
+        <html:div data-l10n-id="pref-keyword-filter-rules-hint"></html:div>
+      </html:div>
+    </vbox>
+
+    <!-- Save to folder -->
+    <checkbox
+      native="true"
+      id="__addonRef__-save-to-folder"
+      preference="__prefsPrefix__.saveToFolder"
+      data-l10n-id="pref-save-to-folder-label"
+      style="margin-top: 12px"
+    />
+    <vbox style="margin-left: 20px">
+      <label
+        data-l10n-id="pref-folder-path-template-label"
+        control="__addonRef__-folder-path-template"
+      ></label>
+      <html:input
+        type="text"
+        id="__addonRef__-folder-path-template"
+        preference="__prefsPrefix__.saveFolderPathTemplate"
+        style="width: 400px"
+      />
+      <html:div style="font-size: 0.9em; color: #666; margin-top: 4px">
+        <html:div data-l10n-id="pref-folder-path-template-hint"></html:div>
+      </html:div>
+    </vbox>
   </groupbox>
 
   <groupbox>

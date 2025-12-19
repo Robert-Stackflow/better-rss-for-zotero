@@ -1,7 +1,16 @@
 
-pref-auto-extraction-title = Automatic Extraction
+pref-extraction-title = Extraction Settings
 pref-auto-extract-label =
     .label = Automatically extract full content when feed updates
+
+pref-batch-interval-label = Batch extraction interval:
+pref-batch-interval-unit = milliseconds
+
+pref-enable-keyword-filter-label =
+    .label = Enable keyword filter
+pref-keyword-filter-rules-label = Keyword filter rules (one per line):
+pref-keyword-filter-rules-hint = Format: + must contain | - must not contain | ? contains any. Example: +AI +machine learning (must contain both AI and machine learning), -advertisement (must not contain advertisement), ?tech ?technology (contains tech or technology)
+
 pref-save-to-folder-label =
     .label = Save extracted items to collection
 pref-folder-path-template-label = Collection Path Template:

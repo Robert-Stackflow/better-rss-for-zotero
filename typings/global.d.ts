@@ -1,6 +1,7 @@
 declare const _globalThis: {
   [key: string]: any;
   Zotero: _ZoteroTypes.Zotero;
+  ZoteroPane: _ZoteroTypes.ZoteroPane;
   ztoolkit: ZToolkit;
   addon: typeof addon;
 };
