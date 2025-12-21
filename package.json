@@ -1,6 +1,6 @@
 {
     "name": "better-rss-for-zotero",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Enhanced RSS functionality for Zotero with full content extraction",
     "config": {
         "addonName": "Better RSS for Zotero",
