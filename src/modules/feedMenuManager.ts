@@ -1,4 +1,5 @@
 // Feed Menu Manager Module
+import { selected } from "../utils/ztoolkit";
 import { getString } from "../utils/locale";
 
 export class FeedMenuManager {
@@ -30,9 +31,9 @@ export class FeedMenuManager {
         icon: `chrome://${addon.data.config.addonRef}/content/icons/favicon.png`,
         commandListener: (ev) => addon.hooks.onExtractAllFromFeed(),
         getVisibility: (elem, ev) => {
-          const collection =
-            Zotero.getActiveZoteroPane().getSelectedCollection();
-          if (!collection) return true;
+          const { isFeed } = selected();
+          if (isFeed) return true;
+          return false;
         },
       });
 

@@ -11,6 +11,7 @@ const DEFAULT_PREFS: Record<string, any> = {
   saveFolderPathTemplate: "Feeds/%feedName%",
   saveNote: true,
   saveSnapshot: true,
+  saveHTML: false,
   addBetterRSSTag: true,
   addFeedNameTag: true,
 };
@@ -21,6 +22,7 @@ export function getSettings(): {
   saveFolderPathTemplate: string;
   saveNote: boolean;
   saveSnapshot: boolean;
+  saveHTML: boolean;
   addBetterRSSTag: boolean;
   addFeedNameTag: boolean;
 } {
@@ -29,18 +31,19 @@ export function getSettings(): {
   const saveFolderPathTemplate = getPref("saveFolderPathTemplate") as string;
   const saveNote = getPref("saveNote") as boolean;
   const saveSnapshot = getPref("saveSnapshot") as boolean;
+  const saveHTML = getPref("saveHTML") as boolean;
   const addBetterRSSTag = getPref("addBetterRSSTag") as boolean;
   const addFeedNameTag = getPref("addFeedNameTag") as boolean;
 
-  ztoolkit.log(
-    `\nautoExtract: ${autoExtract} \n` +
-      `saveToFolder: ${saveToFolder} \n` +
-      `saveFolderPathTemplate: ${saveFolderPathTemplate} \n` +
-      `saveNote: ${saveNote} \n` +
-      `saveSnapshot: ${saveSnapshot} \n` +
-      `addBetterRSSTag: ${addBetterRSSTag} \n` +
-      `addFeedNameTag: ${addFeedNameTag}`
-  );
+  // ztoolkit.log(
+  //   `\nautoExtract: ${autoExtract} \n` +
+  //     `saveToFolder: ${saveToFolder} \n` +
+  //     `saveFolderPathTemplate: ${saveFolderPathTemplate} \n` +
+  //     `saveNote: ${saveNote} \n` +
+  //     `saveSnapshot: ${saveSnapshot} \n` +
+  //     `addBetterRSSTag: ${addBetterRSSTag} \n` +
+  //     `addFeedNameTag: ${addFeedNameTag}`
+  // );
 
   return {
     autoExtract,
@@ -48,6 +51,7 @@ export function getSettings(): {
     saveFolderPathTemplate,
     saveNote,
     saveSnapshot,
+    saveHTML,
     addBetterRSSTag,
     addFeedNameTag,
   };
@@ -130,6 +134,13 @@ function bindPrefEvents() {
     .querySelector(`#${makeId("save-snapshot")}`)
     ?.addEventListener("command", (e: Event) => {
       onPrefsEvent("toggleSaveSnapshot");
+    });
+
+  // Save HTML checkbox
+  doc
+    .querySelector(`#${makeId("save-html")}`)
+    ?.addEventListener("command", (e: Event) => {
+      onPrefsEvent("toggleSaveHTML");
     });
 
   // Add Better RSS tag checkbox
@@ -217,6 +228,14 @@ function onPrefsEvent(type: string, fromElement: boolean = true) {
         const saveSnapshot = getPref("saveSnapshot") as boolean;
         ztoolkit.log(`Snapshot saving toggled: ${saveSnapshot}`);
         setPref("saveSnapshot", saveSnapshot);
+      }
+      break;
+
+    case "toggleSaveHTML":
+      {
+        const saveHTML = getPref("saveHTML") as boolean;
+        ztoolkit.log(`HTML saving toggled: ${saveHTML}`);
+        setPref("saveHTML", saveHTML);
       }
       break;
 

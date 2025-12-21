@@ -35,6 +35,7 @@
     "license": "MIT",
     "dependencies": {
         "@mozilla/readability": "^0.5.0",
+        "zotero-plugin": "^8.0.4",
         "zotero-plugin-toolkit": "^5.1.0-beta.13"
     },
     "devDependencies": {

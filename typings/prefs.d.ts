@@ -16,6 +16,7 @@ declare namespace _ZoteroTypes {
       "keywordFilterRules": string;
       "saveNote": boolean;
       "saveSnapshot": boolean;
+      "saveHTML": boolean;
       "addBetterRSSTag": boolean;
       "addFeedNameTag": boolean;
       "processedItems": string;

@@ -29,6 +29,7 @@ export type FluentMessageId =
   | 'pref-folder-path-template-label'
   | 'pref-keyword-filter-rules-hint'
   | 'pref-keyword-filter-rules-label'
+  | 'pref-save-html-label'
   | 'pref-save-note-label'
   | 'pref-save-snapshot-label'
   | 'pref-save-to-folder-label'

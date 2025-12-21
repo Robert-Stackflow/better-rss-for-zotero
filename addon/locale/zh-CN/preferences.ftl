@@ -21,6 +21,8 @@ pref-save-note-label =
     .label = 将提取的内容保存为笔记
 pref-save-snapshot-label =
     .label = 将提取的内容保存为网页快照
+pref-save-html-label =
+    .label = 将提取的内容保存为 HTML 文件附件
 
 pref-tagging-title = 标签选项
 pref-add-better-rss-tag-label =

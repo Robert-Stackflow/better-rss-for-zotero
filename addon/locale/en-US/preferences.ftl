@@ -21,6 +21,8 @@ pref-save-note-label =
     .label = Save extracted content as note
 pref-save-snapshot-label =
     .label = Save extracted content as snapshot
+pref-save-html-label =
+    .label = Save extracted content as HTML file attachment
 
 pref-tagging-title = Tagging Options
 pref-add-better-rss-tag-label =

@@ -1,5 +1,5 @@
 import { getString, initLocale } from "./utils/locale";
-import { createZToolkit } from "./utils/ztoolkit";
+import { createZToolkit, selected } from "./utils/ztoolkit";
 import { ContentExtractor } from "./modules/contentExtractor";
 import { FeedMenuManager } from "./modules/feedMenuManager";
 import { FeedObserver } from "./modules/feedObserver";
@@ -139,23 +139,25 @@ export async function onExtractContent() {
  * Handle menu command - Extract all articles from feed
  */
 export async function onExtractAllFromFeed() {
-  const collection = Zotero.getActiveZoteroPane().getSelectedCollection();
-  if (!collection) {
+  const { feed, isFeed } = selected();
+  if (!isFeed || !feed) {
+    ztoolkit.log("No feed selected");
     return;
   }
-
-  const library = Zotero.Libraries.get(collection.libraryID);
-  if (!library || library.libraryType !== "feed") {
-    return;
-  }
-
+  ztoolkit.log(`Starting extraction for feed: ${feed.name}`);
   // Get all items in the feed
-  const search = new Zotero.Search();
-  search.addCondition("libraryID", "is", collection.libraryID.toString());
-  search.addCondition("itemType", "is", "feedItem");
-
-  const itemIDs = await search.search();
-  const items = await Zotero.Items.getAsync(itemIDs);
+  let sql = `
+  SELECT FI.itemID
+  FROM feedItems FI
+  JOIN items I USING (itemID)
+  WHERE I.libraryID = ?
+`;
+  const itemIDs = (await Zotero.DB.columnQueryAsync(sql, [
+    feed.libraryID,
+  ])) as number[];
+  const items = itemIDs
+    .map((id) => Zotero.Items.get(id))
+    .filter((item) => item);
 
   if (!items || items.length === 0) {
     ztoolkit.log("No feed items found");

@@ -13,6 +13,7 @@ pref("__prefsPrefix__.keywordFilterRules", ""); // JSON string
 // Content saving options
 pref("__prefsPrefix__.saveNote", true);
 pref("__prefsPrefix__.saveSnapshot", true);
+pref("__prefsPrefix__.saveHTML", false);
 
 // Tagging options
 pref("__prefsPrefix__.addBetterRSSTag", true);

@@ -129,6 +129,8 @@ export class KeywordFilter {
 
     const textToCheck = `${title} ${abstract}`;
 
+    ztoolkit.log(`Checking item ID ${item.id} with text: ${textToCheck}`);
+
     return this.matchesRules(textToCheck, rules);
   }
 }

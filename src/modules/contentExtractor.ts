@@ -103,6 +103,10 @@ export class ContentExtractor {
       await this._createSnapshot(targetItem, url);
     }
 
+    if (settings.saveHTML) {
+      await this._createHTMLAttachment(targetItem, extracted, url);
+    }
+
     ztoolkit.log(`Successfully processed item: ${targetItem.id}`);
   }
 
@@ -546,6 +550,167 @@ export class ContentExtractor {
       ztoolkit.log(`Failed to create snapshot: ${(e as Error).message}`);
     }
   }
+
+  /**
+   * Create HTML attachment from extracted content
+   */
+  private async _createHTMLAttachment(
+    item: Zotero.Item,
+    extracted: {
+      title: string;
+      content: string;
+      textContent: string;
+      excerpt: string;
+    },
+    url: string
+  ): Promise<void> {
+    try {
+      // Create a safe filename from item title
+      const title = item.getField("title") as string;
+      const fileName = `${title}.html`.replace(/[<>:"/\\|?*]/g, "_");
+
+      // Build complete HTML document
+      const htmlContent = this._buildHTMLDocument(item, extracted, url);
+
+      // Create temporary file
+      const tempFile = Zotero.getTempDirectory();
+      tempFile.append(fileName);
+
+      // Write HTML content to file
+      await Zotero.File.putContentsAsync(tempFile, htmlContent);
+
+      // Import file as attachment
+      await Zotero.Attachments.importFromFile({
+        file: tempFile,
+        libraryID: item.libraryID,
+        parentItemID: item.id,
+        title: `HTML of ${title}`,
+      });
+
+      // Clean up temp file
+      try {
+        tempFile.remove(false);
+      } catch (e) {
+        // Ignore cleanup errors
+      }
+
+      ztoolkit.log(`Created HTML attachment for item: ${item.id}`);
+    } catch (e) {
+      ztoolkit.log(`Failed to create HTML attachment: ${(e as Error).message}`);
+    }
+  }
+
+  /**
+   * Build complete HTML document for attachment
+   */
+  private _buildHTMLDocument(
+    item: Zotero.Item,
+    extracted: { title: string; content: string },
+    url: string
+  ): string {
+    const date = new Date().toLocaleString();
+
+    return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${this._escapeHTML(extracted.title)}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      color: #333;
+      background: #fff;
+    }
+    .header {
+      background: #f5f5f5;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 30px;
+      border-left: 4px solid #4285f4;
+    }
+    .header h1 {
+      margin: 0 0 15px 0;
+      color: #333;
+      font-size: 2em;
+    }
+    .metadata {
+      font-size: 0.9em;
+      color: #666;
+    }
+    .metadata p {
+      margin: 8px 0;
+    }
+    .metadata a {
+      color: #4285f4;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .metadata a:hover {
+      text-decoration: underline;
+    }
+    .content {
+      margin-top: 30px;
+      font-size: 1.1em;
+    }
+    .content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+    }
+    .content pre {
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .content code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+    .content blockquote {
+      border-left: 4px solid #ddd;
+      margin: 20px 0;
+      padding-left: 20px;
+      color: #666;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #e0e0e0;
+      font-size: 0.85em;
+      color: #888;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>${this._escapeHTML(extracted.title)}</h1>
+    <div class="metadata">
+      <p><strong>原文链接：</strong> <a href="${this._escapeHTML(
+        url
+      )}" target="_blank">${this._escapeHTML(url)}</a></p>
+      <p><strong>提取时间：</strong> ${date}</p>
+    </div>
+  </div>
+  <div class="content">
+    ${extracted.content}
+  </div>
+  <div class="footer">
+    <p>Content extracted by <strong>Better RSS for Zotero</strong></p>
+  </div>
+</body>
+</html>`;
+  }
+
   /**
    * Escape HTML
    */
